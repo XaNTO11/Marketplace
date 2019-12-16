@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from "@reach/router";
 import AskQuestion from "./AskQuestion";
 
-export default class Questions extends Component {
+export default class Categories extends Component {
 
     render() {
         if (!this.props.categories) return <p>Loading...</p>;

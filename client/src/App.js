@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Link, Router} from "@reach/router";
 import {connect} from "react-redux";
 
-import Questions from "./Questions";
-import Question from "./Question";
+import Categories from "./Categories";
+import Category from "./Category";
 import Login from "./Login";
 import Alert from "./Alert";
 import UserHeader from "./UserHeader";
@@ -74,13 +74,13 @@ class App extends Component {
                     <Alert msg={this.state.alertMsg}/>
 
                     <Router>
-                        <Questions path="/"
-                                   categories={this.props.categories}
+                        <Categories path="/"
+                                    categories={this.props.categories}
                                    // onAskCategory={(description) => this.props.postCategory(description)}
                         />
 
-                        <Question path="/category/:id"
-                            getCategory={(id) => this.props.categories.find(e => e._id === id)}
+                        <Category path="/category/:id"
+                                  getCategory={(id) => this.props.categories.find(e => e._id === id)}
                             // handleVote={(id, aid) => this.props.voteAnswerUp(id, aid)}
                             // onPostAnswer={(id, text) => this.props.postAnswer(id, text)}
                         />

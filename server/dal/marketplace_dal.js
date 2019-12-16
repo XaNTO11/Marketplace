@@ -97,7 +97,7 @@ class MarketplaceDAL {
 
     // async bootstrap(count = 10) {
     //     let l = (await this.getQuestions()).length;
-    //     console.log("Question collection size:", l);
+    //     console.log("Category collection size:", l);
     //
     //     if (l === 0) {
     //         let promises = [];
@@ -119,7 +119,7 @@ class MarketplaceDAL {
     // }
     async bootstrap(count = 1) {
         let l = (await this.getCats()).length;
-        console.log("Question collection size:", l);
+        console.log("Category collection size:", l);
 
         if (l === 0) {
             let promises = [];

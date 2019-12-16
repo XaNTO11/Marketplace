@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PostAnswer from "./PostAnswer";
 import {Link} from "@reach/router";
 
-export default class Question extends Component {
+export default class Category extends Component {
 
     render() {
         const category = this.props.getCategory(this.props.id);
