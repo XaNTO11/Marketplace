@@ -69,6 +69,10 @@ export const replaceCategories = categories => ({
     type: 'ADD_CATEGORY',
     categories: categories
 });
+export const replaceBook = book => ({
+    type: 'SHOW_BOOK',
+    book: book
+});
 
 // export const loadQuestions = _ => async function (dispatch) {
 //     try {
@@ -92,6 +96,20 @@ export const loadCategories = _ => async function (dispatch) {
         dispatch(showAndHideAlert("Error loading categories", e.message, "error"));
     }
 };
+
+// export const loadBook = (id,bid) => async function (dispatch) {
+//     try {
+//         const url = `${API_URL}/category/${id}/books/${bid}`;
+//         const response = await Auth.fetch(url);
+//         const data = await response.json();
+//         // dispatch(replaceBook(data));
+//         dispatch(data);
+//
+//     } catch (e) {
+//         console.error(e);
+//         dispatch(showAndHideAlert("Error loading categories", e.message, "error"));
+//     }
+// };
 
 // export const postQuestion = text => async function(dispatch) {
 //     if (text === "") return;
@@ -192,18 +210,18 @@ export const postBook = (id, book) => async function(dispatch) {
 //         console.error(e);
 //     }
 // };
-export const loadBook = (catId, bookId) => async function(dispatch) {
-    try {
-        const response = await Auth.fetch(`${API_URL}/category/${catId}/books/${bookId}`);
-        if (response.status === 401) {
-            dispatch(showAndHideAlert("Login", "You need to login to vote!", "alert"));
-            await navigate("/login");
-        }
-        await response.json();
-        dispatch();
-    } catch (e) {
-        dispatch(showAndHideAlert("Vote error", e.message, "error"));
-        console.error(e);
-    }
-};
+// export const loadBook = (catId, bookId) => async function(dispatch) {
+//     try {
+//         const response = await Auth.fetch(`${API_URL}/category/${catId}/books/${bookId}`);
+//         if (response.status === 401) {
+//             dispatch(showAndHideAlert("Login", "You need to login to vote!", "alert"));
+//             await navigate("/login");
+//         }
+//         await response.json();
+//         dispatch();
+//     } catch (e) {
+//         dispatch(showAndHideAlert("Vote error", e.message, "error"));
+//         console.error(e);
+//     }
+// };
 

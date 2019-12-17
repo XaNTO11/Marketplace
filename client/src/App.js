@@ -4,12 +4,13 @@ import {connect} from "react-redux";
 
 import Categories from "./Categories";
 import Category from "./Category";
+import Book from "./Book";
 import Login from "./Login";
 import Alert from "./Alert";
 import UserHeader from "./UserHeader";
 
 // import { login, logout, loadQuestions, postQuestion, postAnswer, voteAnswerUp, hideAlert } from './actions';
-import {login, logout, loadCategories, postCategory, postAnswer, hideAlert, postBook} from './actions';
+import {login, logout, loadCategories, postCategory, loadBook, hideAlert, postBook} from './actions';
 
 
 class App extends Component {
@@ -85,6 +86,32 @@ class App extends Component {
                             // onPostAnswer={(id, text) => this.props.postAnswer(id, text)}
                         />
 
+                        <Book path="/category/:id/books/:bid"
+                              // getCategory={(id) => this.props.categories.find(e => e._id === id)}
+                              // getBook={(id, bid) => this.props.loadBook(id, bid)}
+                            // getBook={() => this.props.categories.find(e => e._id === id)}
+                            //   getBook={(bid) => this.props.categories.filter(function(book){return book.books.find(e => e._id == bid)})}
+                            //   getBook={(bid) => this.props.categories.forEach(e => console.log(e.books.find(c => c._id == bid)))}
+
+                        //       getBook={(id, bid) => this.props.categories.forEach( e => {
+                        //         if(e._id == id){
+                        //             e.books.forEach(d => {
+                        //                 if(d._id == bid){
+                        //                    console.log(d, "test data")
+                        //                    //  return "Hej";
+                        //                 }
+                        //             })
+                        //         }
+                        // })}
+                        //     getBook={(id, bid) => this.props.categories}
+                            getBook={(id, bid) => this.props.categories.find(e => e._id === id)?.books.find(x => x._id === bid)}
+                        //     getBook={(id, bid) => console.log(bid)}
+                        //     getBook={(id, bid) => this.props.categories}
+
+                            // handleVote={(id, aid) => this.props.voteAnswerUp(id, aid)}
+                            // onPostAnswer={(id, text) => this.props.postAnswer(id, text)}
+                        />
+
                         <Login path="/login"
                             login={(username, password) => this.props.login(username, password)}
                             infoMsg={this.state.infoMsg}
@@ -115,6 +142,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadCategories: _ => dispatch(loadCategories()),
+    // loadBook: (id, bid) => dispatch(loadBook(id, bid)),
     postCategory: description => dispatch(postCategory(description)),
     // postAnswer: (id, text) => dispatch(postAnswer(id, text)),
     login: (username, password) => dispatch(login(username, password)),

@@ -7,12 +7,13 @@ export default class Category extends Component {
     render() {
         const category = this.props.getCategory(this.props.id);
         let booksContent = <p>loading...</p>;
+        console.log(category, "testMinBamse Cat")
 
         if (category) {
             booksContent = category.books ?
                 category.books.map(
                     b =>
-                        <Link className="list-item" to={"/category/" + b._id}>
+                        <Link className="list-item" to={`/category/${this.props.id}/books/${b._id}`}>
                         <li key={b._id}>
                             <div key={b._id} className="columns">
                                 <div className="column">{b.title}</div>

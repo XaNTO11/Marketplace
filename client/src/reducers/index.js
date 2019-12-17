@@ -19,15 +19,33 @@ function categories(state = [], action) {
     }
 }
 
+// function book(state = [], action) {
+//     switch (action.type) {
+//         case 'ADD_BOOK': {
+//             return {
+//
+//             };
+//         }
+//         default:
+//             return state
+//     }
+// }
+
+
 // function book(state = [], action){
 //     switch (action.type) {
 //         case 'SHOW_BOOK': {
 //             return {
-//                 title: action.title,
-//                 author: action.author,
-//                 cat: action.cat,
-//                 sellerName: action.sellerName,
-//                 sellerEmail: action.sellerEmail
+//                 title: action.book.title,
+//                 author: action.book.author,
+//                 cat: action.book.cat,
+//                 sellerName: action.book.sellerName,
+//                 sellerEmail: action.book.sellerEmail
+//                 // title: "TestTitle",
+//                 // author: "TestAuthor",
+//                 // cat: "TestCat",
+//                 // sellerName: "TestSellerName",
+//                 // sellerEmail: "TestSellerEmail"
 //             }
 //         }
 //         default:

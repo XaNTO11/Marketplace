@@ -117,7 +117,7 @@ class MarketplaceDAL {
     //         return Promise.all(promises);
     //     }
     // }
-    async bootstrap(count = 1) {
+    async bootstrap(count = 2) {
         let l = (await this.getCats()).length;
         console.log("Category collection size:", l);
 
