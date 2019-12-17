@@ -69,7 +69,7 @@ class MarketplaceDAL {
     // }
 
     async addBook(catId, book) {
-        const cat = await this.getQuestion(catId);
+        const cat = await this.getCat(catId);
         cat.books.push(book);
         return cat.save();
 

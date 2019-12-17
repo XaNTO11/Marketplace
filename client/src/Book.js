@@ -6,21 +6,10 @@ export default class Book extends Component {
 
 
     render() {
-        // const category = this.props.getCategory(this.props.id);
         let booksContent = <p>loading...</p>;
         const b = this.props.getBook(this.props.id, this.props.bid);
-
-        // console.log(book, "test")
-        // this.props.getBook(this.props.id, this.props.bid);
-        //     console.log(this.props.getBook(this.props.id, this.props.bid), "Test book")
-            //logic
-
-
-
-
-
         if (b) {
-            booksContent = <Link className="list-item" to={"/category/" + b._id}>
+            booksContent =
                             <li key={b._id}>
                                 <div key={b._id} className="columns">
                                     <div className="column">{b.title}</div>
@@ -28,9 +17,7 @@ export default class Book extends Component {
                                     <div className="column">Seller: {b.sellerName}</div>
                                     <div className="column">{b.sellerEmail}</div>
                                 </div>
-                            </li>
-                        </Link>
-           ;
+                            </li>;
         }
 
         return (

@@ -3,6 +3,11 @@ import {Link} from "@reach/router";
 
 class UserHeader extends Component {
     render() {
+        const adminPage = () => {
+            if (this.props.username) {
+                return <Link to="/admin" className="btnText">Admin page</Link>
+            }
+        }
         const writeLoginStatus = () => {
             if (this.props.username) {
                 return (
@@ -16,10 +21,14 @@ class UserHeader extends Component {
             }
         };
 
+
         return (
             <div className="container is-widescreen">
                 <div className="notification">
                     {writeLoginStatus()}
+                </div>
+                <div>
+                    {adminPage()}
                 </div>
             </div>
         );

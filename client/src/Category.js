@@ -17,9 +17,6 @@ export default class Category extends Component {
                         <li key={b._id}>
                             <div key={b._id} className="columns">
                                 <div className="column">{b.title}</div>
-                                <div className="column">{b.author}</div>
-                                <div className="column">Seller: {b.sellerName}</div>
-                                <div className="column">{b.sellerEmail}</div>
                             </div>
                         </li>
                         </Link>

@@ -10,7 +10,8 @@ import Alert from "./Alert";
 import UserHeader from "./UserHeader";
 
 // import { login, logout, loadQuestions, postQuestion, postAnswer, voteAnswerUp, hideAlert } from './actions';
-import {login, logout, loadCategories, postCategory, loadBook, hideAlert, postBook} from './actions';
+import {login, logout, loadCategories, postCategory, hideAlert, postBook} from './actions';
+import PostAnswer from "./PostAnswer";
 
 
 class App extends Component {
@@ -83,33 +84,14 @@ class App extends Component {
                         <Category path="/category/:id"
                                   getCategory={(id) => this.props.categories.find(e => e._id === id)}
                             // handleVote={(id, aid) => this.props.voteAnswerUp(id, aid)}
-                            // onPostAnswer={(id, text) => this.props.postAnswer(id, text)}
                         />
 
                         <Book path="/category/:id/books/:bid"
-                              // getCategory={(id) => this.props.categories.find(e => e._id === id)}
-                              // getBook={(id, bid) => this.props.loadBook(id, bid)}
-                            // getBook={() => this.props.categories.find(e => e._id === id)}
-                            //   getBook={(bid) => this.props.categories.filter(function(book){return book.books.find(e => e._id == bid)})}
-                            //   getBook={(bid) => this.props.categories.forEach(e => console.log(e.books.find(c => c._id == bid)))}
-
-                        //       getBook={(id, bid) => this.props.categories.forEach( e => {
-                        //         if(e._id == id){
-                        //             e.books.forEach(d => {
-                        //                 if(d._id == bid){
-                        //                    console.log(d, "test data")
-                        //                    //  return "Hej";
-                        //                 }
-                        //             })
-                        //         }
-                        // })}
-                        //     getBook={(id, bid) => this.props.categories}
                             getBook={(id, bid) => this.props.categories.find(e => e._id === id)?.books.find(x => x._id === bid)}
-                        //     getBook={(id, bid) => console.log(bid)}
-                        //     getBook={(id, bid) => this.props.categories}
+                        />
 
-                            // handleVote={(id, aid) => this.props.voteAnswerUp(id, aid)}
-                            // onPostAnswer={(id, text) => this.props.postAnswer(id, text)}
+                        <PostAnswer path="/category/:id/books"
+                                    onPostBook={(id, book) => this.props.postBook(id, book)}
                         />
 
                         <Login path="/login"
@@ -124,7 +106,7 @@ class App extends Component {
                     <div className="container">
                         <div className="content has-text-centered">
                             <p>
-                                <strong>QA Site</strong> by Kristian
+                                <strong>Marketplace Site</strong> by Brian
                             </p>
                         </div>
                     </div>
@@ -143,8 +125,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     loadCategories: _ => dispatch(loadCategories()),
     // loadBook: (id, bid) => dispatch(loadBook(id, bid)),
-    postCategory: description => dispatch(postCategory(description)),
-    // postAnswer: (id, text) => dispatch(postAnswer(id, text)),
+    // postCategory: description => dispatch(postCategory(description)),
+    postBook: (id, text) => dispatch(postBook(id, text)),
     login: (username, password) => dispatch(login(username, password)),
     logout: _ => dispatch(logout()),
     // voteAnswerUp: (questionId, answerId) => dispatch(voteAnswerUp(questionId, answerId)),
