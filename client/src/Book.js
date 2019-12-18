@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PostAnswer from "./PostAnswer";
+import PostBook from "./PostBook";
 import {Link} from "@reach/router";
 
 export default class Book extends Component {

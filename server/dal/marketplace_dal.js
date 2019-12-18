@@ -59,7 +59,16 @@ class MarketplaceDAL {
 
     async createCat(newCat) {
         let cat = new this.marketplaceModel(newCat);
+        console.log(newCat)
         return cat.save();
+    }
+
+    async removeCat(id){
+        console.log(id)
+        // let d = this.getCat(id)
+        // console.log(d)
+        return this.marketplaceModel.findOneAndDelete({_id: id});
+        // cat.save();
     }
     //
     // async addAnswer(questionId, answer) {

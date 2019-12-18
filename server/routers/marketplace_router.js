@@ -30,11 +30,14 @@ module.exports = (dal) => {
 
     router.post('/', (req, res) => {
         let newCat = {
-            description : req.body.text,
+            description : req.body.description,
             books : []
         };
+        console.log(newCat)
         dal.createCat(newCat).then(newCat => res.json(newCat));
     });
+
+
 
     // router.post('/:id/answers', (req, res) => {
     //     dal.addAnswer(req.params.id, req.body.text).then(updatedQuestion => res.json(updatedQuestion));
@@ -43,6 +46,12 @@ module.exports = (dal) => {
     router.post('/:id/books', (req, res) => {
         dal.addBook(req.params.id, req.body).then(updatedCat => res.json(updatedCat));
     });
+
+    router.put('/:id', (req, res) => {
+        let id = req.params.id;
+        console.log("hej med jer")
+        dal.removeCat(id).then(cats => res.json(cats));
+    })
 
     // router.put('/:id/answers/:aid/vote', (req, res) => {
     //     let id = req.params.id;

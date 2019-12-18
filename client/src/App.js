@@ -3,6 +3,8 @@ import {Link, Router} from "@reach/router";
 import {connect} from "react-redux";
 
 import Categories from "./Categories";
+import AdminPage from "./AdminPage";
+
 import Category from "./Category";
 import Book from "./Book";
 import Login from "./Login";
@@ -10,8 +12,8 @@ import Alert from "./Alert";
 import UserHeader from "./UserHeader";
 
 // import { login, logout, loadQuestions, postQuestion, postAnswer, voteAnswerUp, hideAlert } from './actions';
-import {login, logout, loadCategories, postCategory, hideAlert, postBook} from './actions';
-import PostAnswer from "./PostAnswer";
+import {login, logout, loadCategories, postCategory, hideAlert, postBook, delCat} from './actions';
+import PostBook from "./PostBook";
 
 
 class App extends Component {
@@ -70,7 +72,7 @@ class App extends Component {
                     </div>
                 </section>
 
-                <UserHeader username={this.props.user.username} logout={_ => this.props.logout()}/>
+                <UserHeader username={this.props.user.username} admin={this.props.user.admin} logout={_ => this.props.logout()}/>
 
                 <section className="section">
                     <Alert msg={this.state.alertMsg}/>
@@ -79,6 +81,17 @@ class App extends Component {
                         <Categories path="/"
                                     categories={this.props.categories}
                                    // onAskCategory={(description) => this.props.postCategory(description)}
+                                    username={this.props.user.username}
+                                    // user={this.props.user}
+                                    // admin={this.props.user.admin}
+                        />
+
+                        <AdminPage path="/admin"
+                                   categories={this.props.categories}
+                                   onDelCat={(id) => this.props.delCat(id)}
+                                   onCreateCategory={(category) => this.props.postCategory(category)}
+                                    // username={this.props.user.username}
+                                    // user={this.props.user}
                         />
 
                         <Category path="/category/:id"
@@ -90,8 +103,9 @@ class App extends Component {
                             getBook={(id, bid) => this.props.categories.find(e => e._id === id)?.books.find(x => x._id === bid)}
                         />
 
-                        <PostAnswer path="/category/:id/books"
-                                    onPostBook={(id, book) => this.props.postBook(id, book)}
+                        <PostBook path="/category/CreateBook"
+                                  onPostBook={(id, title, author, sellerName, sellerEmail) => this.props.postBook(id, title, author, sellerName, sellerEmail)}
+                                  categories={this.props.categories}
                         />
 
                         <Login path="/login"
@@ -124,12 +138,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadCategories: _ => dispatch(loadCategories()),
-    // loadBook: (id, bid) => dispatch(loadBook(id, bid)),
-    // postCategory: description => dispatch(postCategory(description)),
-    postBook: (id, text) => dispatch(postBook(id, text)),
-    login: (username, password) => dispatch(login(username, password)),
+    postCategory: description => dispatch(postCategory(description)),
+    delCat: (id) => dispatch(delCat(id)),
+    postBook: (id, title, author, sellerName, sellerEmail) => dispatch(postBook(id, title, author, sellerName, sellerEmail)),
+    login: (username, password, admin) => dispatch(login(username, password, admin)),
     logout: _ => dispatch(logout()),
-    // voteAnswerUp: (questionId, answerId) => dispatch(voteAnswerUp(questionId, answerId)),
     hideAlert: _ => dispatch(hideAlert())
 });
 

@@ -8,6 +8,11 @@ module.exports = (dal, secret) => {
     router.post('/create', async (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
+        let admin = false;
+        if(!req.body.admin){
+          admin = true;
+        }
+
 
         if (!username || !password) {
             let msg = "Username or password missing!";
@@ -16,7 +21,7 @@ module.exports = (dal, secret) => {
             return;
         }
 
-        const user = { "username": username, "password": password};
+        const user = { "username": username, "password": password, "admin": admin};
         bcrypt.hash(user.password, 10, async (err, hash) => {
             user.hash = hash; // The hash has been made, and is stored on the user object.
             delete user.password; // The clear text password is no longer needed
@@ -34,9 +39,10 @@ module.exports = (dal, secret) => {
     router.post('/authenticate', async (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
+        // const admin = req.body.admin;
 
         if (!username || !password) {
-            let msg = "Username or password missing!";
+            let msg = "Username, password or admin status missing!";
             console.error(msg);
             res.status(401).json({msg: msg});
             return;
@@ -47,11 +53,12 @@ module.exports = (dal, secret) => {
         if (user) { // If the user is found
             bcrypt.compare(password, user.hash, (err, result) => {
                 if (result) { // If the password matched
-                    const payload = { username: username };
+                    const payload = { username: username, admin: user.admin };
                     const token = jwt.sign(payload, secret, { expiresIn: '1h' });
-
+                    console.log(user.admin)
                     res.json({
                         msg: `User '${username}' authenticated successfully`,
+                        admin: user.admin,
                         token: token
                     });
                 }

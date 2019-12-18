@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default class AskQuestion extends Component {
+export default class CreateCategory extends Component {
 
     constructor(props) {
         super(props);
@@ -14,7 +14,8 @@ export default class AskQuestion extends Component {
 
     handleInput(event) {
         event.preventDefault();
-        this.props.onAskCategory(this.state.category);
+        console.log(this.state.category)
+        this.props.onCreateCategory(this.state.category);
         this.setState({category: ""})
     }
 
@@ -29,15 +30,15 @@ export default class AskQuestion extends Component {
             <form>
 
                 <div className="field">
-                    <label className="label" htmlFor="QuestionInput">Your question</label>
+                    <label className="label" htmlFor="CategoryButton">Your question</label>
                     <textarea className="textarea" onChange={this.onChange} name="category"
-                           value={this.state.category}
-                           placeholder="Category"
-                           id="CategoryInput"/>
+                              value={this.state.category}
+                              placeholder="Category"
+                              id="QuestionInput"/>
                 </div>
                 <div className="field">
                     <button className="button is-primary" onClick={this.handleInput} type="submit"
-                            id="categoryButton">Create category
+                            id="CategoryButton">Create category
                     </button>
                 </div>
             </form>

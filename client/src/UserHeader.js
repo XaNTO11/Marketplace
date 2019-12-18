@@ -4,7 +4,7 @@ import {Link} from "@reach/router";
 class UserHeader extends Component {
     render() {
         const adminPage = () => {
-            if (this.props.username) {
+            if (this.props.admin) {
                 return <Link to="/admin" className="btnText">Admin page</Link>
             }
         }
@@ -26,9 +26,7 @@ class UserHeader extends Component {
             <div className="container is-widescreen">
                 <div className="notification">
                     {writeLoginStatus()}
-                </div>
-                <div>
-                    {adminPage()}
+                    <div>{adminPage()}</div>
                 </div>
             </div>
         );

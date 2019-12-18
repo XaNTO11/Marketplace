@@ -37,7 +37,7 @@ class AuthService {
         return (this.getToken() !== null);
     }
 
-    setToken(token, username) {
+    setToken(token, username, admin) {
         localStorage.setItem(this.TOKEN_KEY, token);
         localStorage.setItem("username", username);
     }

@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
 import { Link } from "@reach/router";
-import AskQuestion from "./AskQuestion";
 
 export default class Categories extends Component {
 
     render() {
         if (!this.props.categories) return <p>Loading...</p>;
+
+        const addBook = () => {
+            if (this.props.username) {
+                return <Link to="/category/CreateBook" className="btnText">Add Book</Link>
+
+            }
+        };
 
         let trList = this.props.categories.map(elm =>
             <li key={elm._id}><Link className="list-item" to={"/category/" + elm._id}>{elm.description}</Link></li>
@@ -19,7 +25,8 @@ export default class Categories extends Component {
                     {trList}
                 </ul>
                 <div className="container">
-                    <AskQuestion onAskCategory={this.props.onAskCategory}/>
+                    {/*<AskQuestion onAskCategory={this.props.onAskCategory}/>*/}
+                    {addBook()}
                 </div>
             </div>
         )
