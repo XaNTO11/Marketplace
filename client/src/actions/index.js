@@ -34,7 +34,7 @@ export const addUserCredentials = (username, admin) => ({
     admin: admin
 });
 
-export const removeUserCredentials = (username) => ({
+export const removeUserCredentials = () => ({
     type: 'REMOVE_USER_CRED'
 });
 

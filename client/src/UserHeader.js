@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from "@reach/router";
+import {Link, navigate} from "@reach/router";
 
 class UserHeader extends Component {
     render() {
@@ -14,7 +14,11 @@ class UserHeader extends Component {
                     <>
                         Welcome {this.props.username}.
                         <button className="button is-small" onClick={
-                            (event) => this.props.logout(event)}>logout</button>
+                            (event) => {
+                                    this.props.logout(event)
+                                    navigate("/login")
+                                }
+                            }>logout</button>
                     </>)
             } else {
                 return <Link to="/login" className="btnText">Login</Link>

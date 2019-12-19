@@ -36,6 +36,7 @@ export default class PostBook extends Component {
         );
 
       if(this.props.username){
+        navigate("/category/CreateBook")
           return (
               <form>
                   <div className="field">
@@ -81,7 +82,7 @@ export default class PostBook extends Component {
           )
       }
       else{
-          navigate("/login", alert("You need to be a user to access this area"))
+            navigate("/login")
           return(
           <div>
               Navigating to login page

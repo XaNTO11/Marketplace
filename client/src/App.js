@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, Router} from "@reach/router";
 import {connect} from "react-redux";
-
+import AuthService from "./AuthService";
 import Categories from "./Categories";
 import AdminPage from "./AdminPage";
 import Category from "./Category";
@@ -10,19 +10,27 @@ import Login from "./Login";
 import Alert from "./Alert";
 import UserHeader from "./UserHeader";
 import PostBook from "./PostBook";
-import {login, logout, loadCategories, postCategory, hideAlert, postBook, delCat} from './actions';
+import {login, logout, loadCategories, postCategory, hideAlert, postBook, delCat, addUserCredentials} from './actions';
 
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            alertMsg: ""
+            alertMsg: "",
+            loggedIn: false
         };
     }
 
     componentDidMount() {
         this.props.loadCategories();
+        const API_URL = process.env.REACT_APP_API_URL;
+        const auth = new AuthService(`${API_URL}/users/authenticate`);
+        this.props.addUserCredentials(auth.getUsername(), auth.getAdmin());
+
+        this.setState({
+            loggedIn: auth.loggedIn()
+        })
     }
 
     resetAlert() {
@@ -78,6 +86,7 @@ class App extends Component {
                         <Categories path="/"
                                     categories={this.props.categories}
                                     username={this.props.user.username}
+                                    loggedIn={this.state.loggedIn}
                         />
 
                         <AdminPage path="/admin"
@@ -139,6 +148,7 @@ const mapDispatchToProps = dispatch => ({
     postBook: (id, title, author, sellerName, sellerEmail) => dispatch(postBook(id, title, author, sellerName, sellerEmail)),
     login: (username, password, admin) => dispatch(login(username, password, admin)),
     logout: _ => dispatch(logout()),
+    addUserCredentials: (username, admin) => dispatch(addUserCredentials(username, admin)),
     hideAlert: _ => dispatch(hideAlert())
 });
 

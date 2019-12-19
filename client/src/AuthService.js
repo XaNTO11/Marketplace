@@ -2,9 +2,11 @@
  * Service class for authenticating users against an API
  * and storing JSON Web Tokens in the browser's LocalStorage.
  */
+import jwtDecode from "jwt-decode"
+
 class AuthService {
     TOKEN_KEY = "token";
-
+    
     constructor(auth_api_url) {
         this.auth_api_url = auth_api_url;
     }
@@ -22,25 +24,41 @@ class AuthService {
             throw Error(json.msg);
         }
         this.setToken(json.token);
-        this.setUsername(username);
+
         return json;
     }
 
+    
+    getDecodedToken(){
+        return this.getToken() && jwtDecode(this.getToken())
+    }
+
     loggedIn() {
-        return (this.getToken() !== null);
+        let token = this.getToken();
+        if(!token)
+            return false;
+
+        let decodedToken = this.getDecodedToken();
+      
+       return decodedToken.exp < Date.now();  
     }
 
-    setToken(token, username) {
-        localStorage.setItem(this.TOKEN_KEY, token);
-        localStorage.setItem("username", username);
-    }
-
-    setUsername(username) {
-        localStorage.setItem("username", username);
+    setToken(token) {
+        if(token){
+            localStorage.setItem(this.TOKEN_KEY, token);
+        }
     }
 
     getUsername() {
-        return localStorage.getItem("username");
+        let token = this.getDecodedToken();
+        if(token)
+            return token.username;
+    }
+
+    getAdmin() {
+        let token = this.getDecodedToken();
+        if(token)
+            return token.admin;
     }
 
     getToken() {
@@ -49,7 +67,6 @@ class AuthService {
 
     logout() {
         localStorage.removeItem(this.TOKEN_KEY);
-        localStorage.removeItem("username");
     }
 
     fetch(url, options) {
