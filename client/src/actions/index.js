@@ -123,7 +123,7 @@ export const delCat = (id) => async function(dispatch){
 }
 
 export const postBook = (id, title, author, sellerName, sellerEmail) => async function(dispatch) {
-    if (title === "" ||author === "" ||sellerName === "" ||sellerEmail === "") return;
+    if (title === "" ||author === "" ||sellerName === "" ||sellerEmail === "") return dispatch(showAndHideAlert("Login", "You need to login to post books!", "alert"));
     try {
         const newBook = { title: title, author: author, sellerName: sellerName, sellerEmail: sellerEmail };
         const response = await Auth.fetch(`${API_URL}/category/${id}/books`, {

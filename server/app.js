@@ -9,7 +9,9 @@ const checkJwt = require('express-jwt'); // Check for access tokens automaticall
 /**** Configuration ****/
 const app = express();
 const PORT = process.env.PORT || 8080;
-const MONGO_URL = process.env.MONGO_URL || 'mongodb://Brian:Brian1990@ds145183.mlab.com:45183/marketplace_db';
+// const MONGO_URL = process.env.MONGO_URL || 'mongodb://Brian:Brian1990@ds145183.mlab.com:45183/marketplace_db';
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/marketplace-site';
+
 
 app.use(express.static(path.resolve('..', 'client', 'build')));
 app.use(cors());
