@@ -1,5 +1,5 @@
 {
-  "name": "mern marketplace-side api",
+  "name": "mern_heroku_api",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
