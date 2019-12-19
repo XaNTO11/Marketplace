@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import PostBook from "./PostBook";
-import {Link} from "@reach/router";
 
 export default class Book extends Component {
-
 
     render() {
         let booksContent = <p>loading...</p>;

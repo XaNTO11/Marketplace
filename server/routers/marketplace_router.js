@@ -7,18 +7,10 @@ module.exports = (dal) => {
 
     });
 
-
-
-
     router.get('/:id', (req, res) => {
         let id = req.params.id;
         dal.getCat(id).then(cat => res.json(cat));
     });
-
-    // router.get('/'), (req, res) {
-    //         if (!req.user.admin)
-    //         dal.getCats().then(cats => res.json(cats));
-    //     });
 
     router.post('/', (req, res) => {
         if(!req.user.admin){
@@ -30,7 +22,6 @@ module.exports = (dal) => {
         };
         dal.createCat(newCat).then(newCat => res.json(newCat));
     });
-
 
     router.post('/:id/books', (req, res) => {
         dal.addBook(req.params.id, req.body).then(updatedCat => res.json(updatedCat));

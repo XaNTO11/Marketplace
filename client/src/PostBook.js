@@ -51,7 +51,6 @@ export default class PostBook extends Component {
                           <input type="text" className="form-control" name="title"
                                  placeholder="title of question"
                                  onChange={event => this.handleChange(event)}
-
                           />
                           <br/>
                           <label htmlFor="itemText">Author<br/></label>

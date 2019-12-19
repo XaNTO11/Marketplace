@@ -21,7 +21,6 @@ class UserHeader extends Component {
             }
         };
 
-
         return (
             <div className="container is-widescreen">
                 <div className="notification">

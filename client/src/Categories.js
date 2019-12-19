@@ -20,12 +20,10 @@ export default class Categories extends Component {
         return (
             <div className="container">
                 <h2 className="title is-4">Book categories</h2>
-
                 <ul className="has-background-white-bis">
                     {trList}
                 </ul>
                 <div className="container">
-                    {/*<AskQuestion onAskCategory={this.props.onAskCategory}/>*/}
                     {addBook()}
                 </div>
             </div>

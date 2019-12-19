@@ -1,4 +1,3 @@
-// class QuestionDAL {
 class MarketplaceDAL {
 
     constructor(mongoose) {
@@ -12,20 +11,11 @@ class MarketplaceDAL {
                 price: String,
                 sellerName: String,
                 sellerEmail: String,
-                // votes: Number
             }]
         });
         this.marketplaceModel = mongoose.model('marketplace', marketplaceSchema);
     }
 
-    // async getQuestions() {
-    //     try {
-    //         return await this.questionModel.find({});
-    //     } catch (error) {
-    //         console.error("getQuestion:", error.message);
-    //         return {};
-    //     }
-    // }
     async getCats() {
         try {
             return await this.marketplaceModel.find({});
@@ -35,14 +25,6 @@ class MarketplaceDAL {
         }
     }
 
-    // async getQuestion(id) {
-    //     try {
-    //         return await this.questionModel.findById(id);
-    //     } catch (error) {
-    //         console.error("getQuestion:", error.message);
-    //         return {};
-    //     }
-    // }
     async getCat(id) {
         try {
             return await this.marketplaceModel.findById(id);
@@ -51,11 +33,6 @@ class MarketplaceDAL {
             return {};
         }
     }
-
-    // async createQuestion(newQuestion) {
-    //     let question = new this.questionModel(newQuestion);
-    //     return question.save();
-    // }
 
     async createCat(newCat) {
         let cat = new this.marketplaceModel(newCat);
@@ -67,12 +44,6 @@ class MarketplaceDAL {
         console.log(id, "dette er id")
         return this.marketplaceModel.findOneAndDelete({_id: id});
     }
-    //
-    // async addAnswer(questionId, answer) {
-    //     const question = await this.getQuestion(questionId);
-    //     question.answers.push({text: answer, votes: 0});
-    //     return question.save();
-    // }
 
     async addBook(catId, book) {
         const cat = await this.getCat(catId);
@@ -81,18 +52,10 @@ class MarketplaceDAL {
 
     }
 
-    // async upvoteAnswer(questionId, answerId) {
-    //     const question = await this.getQuestion(questionId);
-    //     const answer = question.answers.id(answerId);
-    //     answer.votes++;
-    //     return question.save();
-    // }
-
     async getBookById(catId, bookId) {
         try {
             const cat = await this.getCat(catId);
             const book = cat.books.id(bookId);
-            // answer.votes++;
             return book;
         } catch (error) {
             console.error("getBookById:", error.message);
@@ -101,28 +64,6 @@ class MarketplaceDAL {
 
     }
 
-    // async bootstrap(count = 10) {
-    //     let l = (await this.getQuestions()).length;
-    //     console.log("Category collection size:", l);
-    //
-    //     if (l === 0) {
-    //         let promises = [];
-    //
-    //         for (let i = 0; i < count; i++) {
-    //             let question = new this.questionModel({
-    //                 text: 'How does this work?',
-    //                 answers: [
-    //                     {text: "No idea!", votes: -3},
-    //                     {text: "Using async functions!", votes: 2},
-    //                     {text: "It's all async but based on promises!", votes: 3},
-    //                 ]
-    //             });
-    //             promises.push(question.save());
-    //         }
-    //
-    //         return Promise.all(promises);
-    //     }
-    // }
     async bootstrap(count = 2) {
         let l = (await this.getCats()).length;
         console.log("Category collection size:", l);
@@ -146,5 +87,4 @@ class MarketplaceDAL {
     }
 }
 
-// module.exports = (mongoose) => new QuestionDAL(mongoose);
 module.exports = (mongoose) => new MarketplaceDAL(mongoose);

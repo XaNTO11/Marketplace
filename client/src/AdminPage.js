@@ -36,7 +36,6 @@ export default class Categories extends Component {
             }
         }
         else{
-            // alert("You need to be an admin to access this area")
             navigate("/", alert("You need to be an admin to access this area"))
         }
 

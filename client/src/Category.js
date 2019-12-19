@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PostBook from "./PostBook";
 import {Link} from "@reach/router";
 
 export default class Category extends Component {
@@ -8,11 +7,6 @@ export default class Category extends Component {
         const category = this.props.getCategory(this.props.id);
         let booksContent = <p>loading...</p>;
         console.log(category, "testMinBamse Cat")
-        // const addBook = () => {
-        //     if (this.props.username) {
-        //        return <PostBook cat={category} onPostBook={this.props.onPostBook}/>
-        //     }
-        // };
 
         if (category) {
             booksContent = category.books ?
@@ -28,7 +22,6 @@ export default class Category extends Component {
                 ) : [];
         }
 
-
         return (
             <>
                 <div className="container">
@@ -42,7 +35,6 @@ export default class Category extends Component {
                     </ul>
                 </section>
                     <section className="section has-background-white-bis">
-                        {/*{addBook()}*/}
                     </section>
 
                 </div>

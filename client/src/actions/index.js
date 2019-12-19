@@ -84,13 +84,11 @@ export const postCategory = description => async function(dispatch) {
     if (description === "") return;
     try {
         const newCategory = { description: description};
-        console.log(newCategory)
 
         const response = await Auth.fetch(`${API_URL}/category`, {
             method: "POST",
             body: JSON.stringify(newCategory)
         });
-        console.log(response, "respons")
         if (response.status === 401) {
             dispatch(showAndHideAlert("Login", "You need to login to an admin user to post categories!", "alert"));
         } else {
@@ -111,14 +109,14 @@ export const delCat = (id) => async function(dispatch){
         });
 
         if (response.status === 401) {
-            dispatch(showAndHideAlert("Login", "You need to login to post answers!", "alert"));
+            dispatch(showAndHideAlert("Login", "You need to login delete categories!", "alert"));
             await navigate("/login");
         } else {
             await response.json();
             dispatch(loadCategories());
         }
     } catch (e) {
-        dispatch(showAndHideAlert("Give answer error", e.message, "error"));
+        dispatch(showAndHideAlert("Category", e.message, "error"));
         console.error(e);
     }
 
@@ -134,14 +132,14 @@ export const postBook = (id, title, author, sellerName, sellerEmail) => async fu
         });
 
         if (response.status === 401) {
-            dispatch(showAndHideAlert("Login", "You need to login to post answers!", "alert"));
+            dispatch(showAndHideAlert("Login", "You need to login to post books!", "alert"));
             await navigate("/login");
         } else {
             await response.json();
             dispatch(loadCategories());
         }
     } catch (e) {
-        dispatch(showAndHideAlert("Give answer error", e.message, "error"));
+        dispatch(showAndHideAlert("Give book error", e.message, "error"));
         console.error(e);
     }
 };

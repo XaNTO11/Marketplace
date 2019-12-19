@@ -4,16 +4,13 @@ import {connect} from "react-redux";
 
 import Categories from "./Categories";
 import AdminPage from "./AdminPage";
-
 import Category from "./Category";
 import Book from "./Book";
 import Login from "./Login";
 import Alert from "./Alert";
 import UserHeader from "./UserHeader";
-
-// import { login, logout, loadQuestions, postQuestion, postAnswer, voteAnswerUp, hideAlert } from './actions';
-import {login, logout, loadCategories, postCategory, hideAlert, postBook, delCat} from './actions';
 import PostBook from "./PostBook";
+import {login, logout, loadCategories, postCategory, hideAlert, postBook, delCat} from './actions';
 
 
 class App extends Component {
@@ -80,10 +77,7 @@ class App extends Component {
                     <Router>
                         <Categories path="/"
                                     categories={this.props.categories}
-                                   // onAskCategory={(description) => this.props.postCategory(description)}
                                     username={this.props.user.username}
-                                    // user={this.props.user}
-                                    // admin={this.props.user.admin}
                         />
 
                         <AdminPage path="/admin"
@@ -91,13 +85,10 @@ class App extends Component {
                                    onDelCat={(id) => this.props.delCat(id)}
                                    onCreateCategory={(category) => this.props.postCategory(category)}
                                    admin={this.props.user.admin}
-                                    // username={this.props.user.username}
-                                    // user={this.props.user}
                         />
 
                         <Category path="/category/:id"
                                   getCategory={(id) => this.props.categories.find(e => e._id === id)}
-                            // handleVote={(id, aid) => this.props.voteAnswerUp(id, aid)}
                         />
 
                         <Book path="/category/:id/books/:bid"
@@ -108,8 +99,6 @@ class App extends Component {
                                   onPostBook={(id, title, author, sellerName, sellerEmail) => this.props.postBook(id, title, author, sellerName, sellerEmail)}
                                   categories={this.props.categories}
                                   username={this.props.user.username}
-
-
                         />
 
                         <Login path="/login"
