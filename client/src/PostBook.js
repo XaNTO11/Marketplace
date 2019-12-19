@@ -1,5 +1,5 @@
     import React, {Component} from 'react';
-    import {Link, navigate, redirectTo} from "@reach/router";
+    import {navigate} from "@reach/router";
 
 export default class PostBook extends Component {
 
@@ -22,7 +22,6 @@ export default class PostBook extends Component {
         else{
             this.props.onPostBook(this.state.catId, this.state.title, this.state.author, this.state.sellerName, this.state.sellerEmail); // Add the task to the state in App.js
             alert(`You just posted a book with the title: ${this.state.title}`)
-            console.log(this.state.title, ": data")
         }
     }
     handleChange(event) {

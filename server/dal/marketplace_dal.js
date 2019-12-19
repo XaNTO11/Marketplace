@@ -64,11 +64,8 @@ class MarketplaceDAL {
     }
 
     async removeCat(id){
-        console.log(id)
-        // let d = this.getCat(id)
-        // console.log(d)
+        console.log(id, "dette er id")
         return this.marketplaceModel.findOneAndDelete({_id: id});
-        // cat.save();
     }
     //
     // async addAnswer(questionId, answer) {

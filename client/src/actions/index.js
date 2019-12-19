@@ -61,7 +61,7 @@ export const logout = _ => async function (dispatch) {
 
 
 /******************************************************
-  Actions for handling questions and answers.
+  Actions for handling marketplace
  ******************************************************/
 export const replaceCategories = categories => ({
     type: 'ADD_CATEGORY',
