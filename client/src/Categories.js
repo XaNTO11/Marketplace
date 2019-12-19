@@ -8,7 +8,7 @@ export default class Categories extends Component {
 
         const addBook = () => {
             if (this.props.loggedIn) {
-                return <Link to="/category/CreateBook" className="btnText">Add Book</Link>
+                return <Link to="/createbook" className="btnText">Add Book</Link>
 
             }
         };

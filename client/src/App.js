@@ -105,13 +105,17 @@ class App extends Component {
                             getBook={(id, bid) => this.props.categories.find(e => e._id === id)?.books.find(x => x._id === bid)}
                         />
 
-                        <PostBook path="/category/CreateBook"
+                        {this.props.user.loggedIn && <PostBook path="/createbook"
                                 // Conditional rendering
                                   onPostBook={(id, title, author, sellerName, sellerEmail) => this.props.postBook(id, title, author, sellerName, sellerEmail)}
                                   categories={this.props.categories}
                                   loggedIn={this.props.user.loggedIn}
-                        /> 
-
+                        /> }
+                        
+                        <Login path="/*"
+                            login={(username, password) => this.props.login(username, password)}
+                            infoMsg={this.state.infoMsg}
+                        />
                         <Login path="/login"
                             login={(username, password) => this.props.login(username, password)}
                             infoMsg={this.state.infoMsg}
