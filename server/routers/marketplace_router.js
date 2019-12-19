@@ -24,6 +24,7 @@ module.exports = (dal) => {
     });
 
     router.post('/:id/books', (req, res) => {
+        console.log(req.body)
         dal.addBook(req.params.id, req.body).then(updatedCat => res.json(updatedCat));
     });
 

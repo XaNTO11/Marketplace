@@ -37,11 +37,9 @@ module.exports = (dal, secret) => {
         if (!username || !password) {
             let msg = "Username or password missing";
             console.error(msg);
-            console.log(username)
             res.status(401).json({msg: msg});
             return;
         }
-        console.log("Test if aut works 2 ")
 
         const user = await dal.getUser(username);
         if (user) { // If the user is found
@@ -49,7 +47,6 @@ module.exports = (dal, secret) => {
                 if (result) { // If the password matched
                     const payload = { username: username, admin: user.admin };
                     const token = jwt.sign(payload, secret, { expiresIn: '1h' });
-                    console.log(user.admin)
                     res.json({
                         msg: `User '${username}' authenticated successfully`,
                         username: user.username,

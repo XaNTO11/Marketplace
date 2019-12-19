@@ -14,7 +14,6 @@ export default class CreateCategory extends Component {
 
     handleInput(event) {
         event.preventDefault();
-        console.log(this.state.category)
         this.props.onCreateCategory(this.state.category);
         this.setState({category: ""})
     }

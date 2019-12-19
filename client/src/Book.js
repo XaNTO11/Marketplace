@@ -9,10 +9,10 @@ export default class Book extends Component {
             booksContent =
                             <li key={b._id}>
                                 <div key={b._id} className="columns">
-                                    <div className="column">{b.title}</div>
-                                    <div className="column">{b.author}</div>
+                                    <div className="column">Title: {b.title}</div>
+                                    <div className="column">Author: {b.author}</div>
                                     <div className="column">Seller: {b.sellerName}</div>
-                                    <div className="column">{b.sellerEmail}</div>
+                                    <div className="column">Contact email: {b.sellerEmail}</div>
                                 </div>
                             </li>;
         }
@@ -20,7 +20,6 @@ export default class Book extends Component {
         return (
             <>
                 <div className="container">
-
                     <section className="section has-background-white-bis">
                         <ul>
                             {booksContent}

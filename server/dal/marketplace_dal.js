@@ -7,7 +7,6 @@ class MarketplaceDAL {
             books: [{
                 title: String,
                 author: String,
-                cat: String,
                 price: String,
                 sellerName: String,
                 sellerEmail: String,
@@ -36,12 +35,10 @@ class MarketplaceDAL {
 
     async createCat(newCat) {
         let cat = new this.marketplaceModel(newCat);
-        console.log(newCat)
         return cat.save();
     }
 
     async removeCat(id){
-        console.log(id, "dette er id")
         return this.marketplaceModel.findOneAndDelete({_id: id});
     }
 
@@ -64,23 +61,40 @@ class MarketplaceDAL {
 
     }
 
-    async bootstrap(count = 2) {
+    async bootstrap() {
         let l = (await this.getCats()).length;
-        console.log("Category collection size:", l);
 
         if (l === 0) {
             let promises = [];
 
-            for (let i = 0; i < count; i++) {
-                let cat = new this.marketplaceModel({
-                    description: 'Harry Potter',
-                    books: [
-                        {title: 'Harry potter and the chamber of secrets', author: 'J.K. Rowling', cat: 'Harry Potter', sellerName: "Brian", sellerEmail: "hej@hej.com"},
-                        {title: 'Harry potter and the half blood prince', author: 'J.K. Rowling', cat: 'Harry Potter', sellerName: "Brian", sellerEmail: "hej@hej.com"},
-                    ]
-                });
-                promises.push(cat.save());
-            }
+            let cat1 = new this.marketplaceModel({
+                description: 'Harry Potter',
+                books: [
+                    {title: 'Harry potter and the chamber of secrets', author: 'J.K. Rowling', sellerName: "Brian", sellerEmail: "hej@hej.com"},
+                    {title: 'Harry potter and the half blood prince', author: 'J.K. Rowling', sellerName: "Brian", sellerEmail: "hej@hej.com"},
+                ]
+            });
+            let cat2 = new this.marketplaceModel({
+                description: 'Javascript',
+                books: [
+                    {title: 'Er Javascript typestærkt?', author: 'Den glade han kat', sellerName: "Brian", sellerEmail: "hej@hej.com"},
+                    {title: 'Javascript 101', author: 'Lars Hansen', sellerName: "Brian", sellerEmail: "hej@hej.com"},
+                ]
+            });
+            promises.push(cat1.save());
+            promises.push(cat2.save());
+
+
+            // for (let i = 0; i < count; i++) {
+            //     let cat = new this.marketplaceModel({
+            //         description: 'Harry Potter',
+            //         books: [
+            //             {title: 'Harry potter and the chamber of secrets', author: 'J.K. Rowling', cat: 'Harry Potter', sellerName: "Brian", sellerEmail: "hej@hej.com"},
+            //             {title: 'Harry potter and the half blood prince', author: 'J.K. Rowling', cat: 'Harry Potter', sellerName: "Brian", sellerEmail: "hej@hej.com"},
+            //         ]
+            //     });
+            //     promises.push(cat.save());
+            // }
 
             return Promise.all(promises);
         }

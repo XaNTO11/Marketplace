@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import {Link} from "@reach/router";
+import {Link, navigate} from "@reach/router";
 
 export default class Category extends Component {
 
     render() {
         const category = this.props.getCategory(this.props.id);
-        let booksContent = <p>loading...</p>;
-        console.log(category, "testMinBamse Cat")
-
+        let booksContent = "";
+        let cats = ""
         if (category) {
             booksContent = category.books ?
                 category.books.map(
@@ -21,12 +20,18 @@ export default class Category extends Component {
                         </Link>
                 ) : [];
         }
+        else{
+            booksContent = <h1>No books to show since, category doesn't exist</h1>
+            cats = <h1>Redirecting to category site</h1>
+            navigate("/", alert("No category with that id, please choose one from the list"))
+        }
 
         return (
             <>
                 <div className="container">
                 <section className="section">
-                    {category ? <h3>{category.description}</h3> : <p>"loading text..."</p>}
+                    {category ? <h3>{category.description}</h3> : ""}
+                    {cats}
                 </section>
 
                 <section className="section has-background-white-bis">
@@ -36,7 +41,6 @@ export default class Category extends Component {
                 </section>
                     <section className="section has-background-white-bis">
                     </section>
-
                 </div>
             </>
         )

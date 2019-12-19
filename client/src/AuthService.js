@@ -27,7 +27,6 @@ class AuthService {
     }
 
     loggedIn() {
-        console.log(this.getToken());
         return (this.getToken() !== null);
     }
 
