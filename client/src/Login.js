@@ -13,7 +13,7 @@ export default class Login extends Component {
 
     async handleInput(event) {
         event.preventDefault();
-        await this.props.login(this.state.username, this.state.password);
+            await this.props.login(this.state.username, this.state.password);
     }
 
     onChange(event) {

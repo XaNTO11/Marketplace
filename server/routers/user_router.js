@@ -42,11 +42,14 @@ module.exports = (dal, secret) => {
         // const admin = req.body.admin;
 
         if (!username || !password) {
-            let msg = "Username, password or admin status missing!";
+            let msg = "Username or password missing";
             console.error(msg);
+            console.log(username)
             res.status(401).json({msg: msg});
             return;
         }
+        console.log("Test if aut works 2 ")
+
 
         //const user = users.find((user) => user.username === username);
         const user = await dal.getUser(username);
@@ -58,6 +61,7 @@ module.exports = (dal, secret) => {
                     console.log(user.admin)
                     res.json({
                         msg: `User '${username}' authenticated successfully`,
+                        username: user.username,
                         admin: user.admin,
                         token: token
                     });

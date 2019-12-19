@@ -41,13 +41,17 @@ export const removeUserCredentials = (username) => ({
 export const login = (username, password) => async function (dispatch) {
     try {
         const user = await Auth.login(username, password);
-        dispatch(addUserCredentials(username, user.admin));
-        console.log("Test Login")
-        navigate("/"); // Front page
+        if(user.username){
+            dispatch(addUserCredentials(user.username, user.admin));
+            navigate("/"); // Front page
+        }
+        else{
+            dispatch(showAndHideAlert("Login Failed",user.msg, "error"))
+        }
+
     } catch(e) {
         dispatch(showAndHideAlert("Login Failed", e.message, "error"));
     }
-    // const loggedIn = await Auth.login(username, password);
 };
 
 export const logout = _ => async function (dispatch) {

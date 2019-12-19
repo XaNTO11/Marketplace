@@ -1,14 +1,4 @@
 import { combineReducers } from 'redux';
-
-// function questions(state = [], action) {
-//     switch (action.type) {
-//         case 'ADD_CATEGORY': {
-//             return [...action.questions];
-//         }
-//         default:
-//             return state
-//     }
-// }
 function categories(state = [], action) {
     switch (action.type) {
         case 'ADD_CATEGORY': {

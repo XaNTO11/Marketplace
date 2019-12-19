@@ -1,5 +1,5 @@
     import React, {Component} from 'react';
-    import {Link, navigate} from "@reach/router";
+    import {Link, navigate, redirectTo} from "@reach/router";
 
 export default class PostBook extends Component {
 
@@ -83,10 +83,10 @@ export default class PostBook extends Component {
           )
       }
       else{
-          navigate("/", alert("You need to be a user to access this area"))
+          navigate("/login", alert("You need to be a user to access this area"))
           return(
           <div>
-              Navigating to front page
+              Navigating to login page
           </div>
           )
       }
