@@ -9,6 +9,8 @@ module.exports = (dal) => {
 
     router.get('/:id', (req, res) => {
         let id = req.params.id;
+        console.log("Bliver dette api kaldt?")
+        console.log(id)
         dal.getCat(id).then(cat => res.json(cat));
     });
 

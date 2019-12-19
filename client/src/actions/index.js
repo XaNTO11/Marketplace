@@ -79,6 +79,19 @@ export const loadCategories = _ => async function (dispatch) {
         dispatch(showAndHideAlert("Error loading categories", e.message, "error"));
     }
 };
+// export const loadCategoryByID = id => async function (dispatch) {
+//     try {
+//         const url = `${API_URL}/category/${id}`;
+//         const response = await Auth.fetch(url);
+//         const data = await response.json();
+//         // console.log(data, "test")
+//
+//         // dispatch(replaceCategories(data));
+//     } catch (e) {
+//         console.error(e);
+//         dispatch(showAndHideAlert("Error loading categories", e.message, "error"));
+//     }
+// };
 
 export const postCategory = description => async function(dispatch) {
     if (description === "") return;

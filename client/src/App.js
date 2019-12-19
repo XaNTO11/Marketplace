@@ -89,6 +89,8 @@ class App extends Component {
 
                         <Category path="/category/:id"
                                   getCategory={(id) => this.props.categories.find(e => e._id === id)}
+                                  // getCategoryKK={(id) => this.props.loadCategoryByID(id)}
+
                         />
 
                         <Book path="/category/:id/books/:bid"
@@ -130,6 +132,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    // loadCategoryByID: id => dispatch(loadCategoryByID(id)),
     loadCategories: _ => dispatch(loadCategories()),
     postCategory: description => dispatch(postCategory(description)),
     delCat: (id) => dispatch(delCat(id)),

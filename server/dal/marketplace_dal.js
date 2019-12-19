@@ -27,8 +27,11 @@ class MarketplaceDAL {
     async getCat(id) {
         try {
             return await this.marketplaceModel.findById(id);
+            console.log("kommer jeg her ind og kan gøre noget?")
         } catch (error) {
             console.error("getQuestion:", error.message);
+            console.log("Error??")
+
             return {};
         }
     }
