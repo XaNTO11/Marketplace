@@ -1,42 +1,43 @@
 import React, {Component} from 'react';
-import { Link } from "@reach/router";
+import {Link, navigate} from "@reach/router";
 import CreateCategory from "./CreateCategory";
 
 export default class Categories extends Component {
 
     render() {
         if (!this.props.categories) return <p>Loading...</p>;
-
-        // const addBook = () => {
-        //     if (this.props.username) {
-        //         return <Link to="/category/CreateBook" className="btnText">Add Book</Link>
-        //
-        //     }
-        // };
-
-        // let trList = this.props.categories.map(elm =>
-        //     <li key={elm._id}><Link className="list-item" to={"/category/" + elm._id}>{elm.description}</Link> <button></button></li>
-        // );
         const categories = this.props.categories;
-        let categorieContent = <p>loading...</p>;
+        let categorieContent = <p>Redirecting to front page</p>;
 
-        if (categories) {
-            categorieContent = categories ?
-                categories.map(
-                    cats =>
-                        <li key={cats._id}>
-                            <div key={cats._id} className="columns">
-                                <div className="column">
-                                    <Link className="list-item" to={"/category/" + cats._id}>{cats.description}</Link>
+        const textArea = () => {
+            if (this.props.admin) {
+              return  <div className="container"><CreateCategory onCreateCategory={this.props.onCreateCategory}/></div>
+            }
+        };
+        if(this.props.admin){
+            categorieContent = <p>loading...</p>;
+            if (categories) {
+                categorieContent = categories ?
+                    categories.map(
+                        cats =>
+                            <li key={cats._id}>
+                                <div key={cats._id} className="columns">
+                                    <div className="column">
+                                        <Link className="list-item" to={"/category/" + cats._id}>{cats.description}</Link>
+                                    </div>
+                                    <div className="column is-one-fifth">
+                                        <button className="button is-small" onClick={
+                                            () => this.props.onDelCat(cats._id)} >remove
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="column is-one-fifth">
-                                    <button className="button is-small" onClick={
-                                        () => this.props.onDelCat(cats._id)} >remove
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-                ) : [];
+                            </li>
+                    ) : [];
+            }
+        }
+        else{
+            // alert("You need to be an admin to access this area")
+            navigate("/", alert("You need to be an admin to access this area"))
         }
 
         return (
@@ -47,11 +48,7 @@ export default class Categories extends Component {
                     {categorieContent}
                 </ul>
                 <div className="container">
-                    {/*<AskQuestion onAskCategory={this.props.onAskCategory}/>*/}
-                    {/*{addBook()}*/}
-                    <div className="container">
-                        <CreateCategory onCreateCategory={this.props.onCreateCategory}/>
-                    </div>
+                    {textArea()}
                 </div>
             </div>
         )

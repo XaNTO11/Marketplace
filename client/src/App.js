@@ -90,6 +90,7 @@ class App extends Component {
                                    categories={this.props.categories}
                                    onDelCat={(id) => this.props.delCat(id)}
                                    onCreateCategory={(category) => this.props.postCategory(category)}
+                                   admin={this.props.user.admin}
                                     // username={this.props.user.username}
                                     // user={this.props.user}
                         />
@@ -106,6 +107,9 @@ class App extends Component {
                         <PostBook path="/category/CreateBook"
                                   onPostBook={(id, title, author, sellerName, sellerEmail) => this.props.postBook(id, title, author, sellerName, sellerEmail)}
                                   categories={this.props.categories}
+                                  username={this.props.user.username}
+
+
                         />
 
                         <Login path="/login"
