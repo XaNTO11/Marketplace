@@ -9,11 +9,7 @@ const checkJwt = require('express-jwt'); // Check for access tokens automaticall
 /**** Configuration ****/
 const app = express();
 const PORT = process.env.PORT || 8080;
-// const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/qa-site';
-// const MONGO_URL = process.env.MONGO_URL || 'mongodb://Brian:Brian1990@ds337718.mlab.com:37718/question_db';
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://Brian:Brian1990@ds145183.mlab.com:45183/marketplace_db';
-
-
 
 app.use(express.static(path.resolve('..', 'client', 'build')));
 app.use(cors());
@@ -25,14 +21,8 @@ let openPaths = [
     /^(?!\/api).*/gim, // Open everything that doesn't begin with '/api'
     '/api/users/authenticate',
     '/api/users/create',
-
-    // { url: '/api/questions', methods: ['GET']  }  // Open GET questions, but not POST.
     { url: '/api/category', methods: ['GET']  },
     {url: /\/api\/category\/[\w]+/gi, methods: ['GET']}
-
-    // { url: '/api/category/id', methods: ['GET']  },
-    // { url: '/api/category/id/books/bid', methods: ['GET']  }// Open GET questions, but not POST.
-
 ];
 
 // Validate the user using authentication. checkJwt checks for auth token.
@@ -65,9 +55,7 @@ mongoose.connect(MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
         app.use('/api/users', usersRouter);
 
         const questionRouter = require('./routers/marketplace_router')(questionDAL);
-        // app.use('/api/questions', questionRouter);
         app.use('/api/category', questionRouter);
-
 
         // "Redirect" all get requests (except for the routes specified above) to React's entry point (index.html)
         // It's important to specify this route as the very last one to prevent overriding all of the other routes

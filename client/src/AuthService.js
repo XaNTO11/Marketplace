@@ -27,17 +27,11 @@ class AuthService {
     }
 
     loggedIn() {
-        // TODO: Check if token is expired using 'jwt-decode'
-        // TODO: Also, install using 'npm install jwt-decode'
-        /*
-        if (jwtDecode(token).exp < Date.now() / 1000) {
-            // Do something to renew token
-        }
-         */
+        console.log(this.getToken());
         return (this.getToken() !== null);
     }
 
-    setToken(token, username, admin) {
+    setToken(token, username) {
         localStorage.setItem(this.TOKEN_KEY, token);
         localStorage.setItem("username", username);
     }

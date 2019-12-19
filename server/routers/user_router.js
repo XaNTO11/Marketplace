@@ -13,7 +13,6 @@ module.exports = (dal, secret) => {
           admin = true;
         }
 
-
         if (!username || !password) {
             let msg = "Username or password missing!";
             console.error(msg);
@@ -30,16 +29,10 @@ module.exports = (dal, secret) => {
         });
     });
 
-    router.put('/', (req, res) => {
-        // TODO: Implement user update (change password, etc).
-        res.status(501).json({msg: "PUT update user not implemented"});
-    });
-
     // This route takes a username and a password and create an auth token
     router.post('/authenticate', async (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
-        // const admin = req.body.admin;
 
         if (!username || !password) {
             let msg = "Username or password missing";
@@ -50,8 +43,6 @@ module.exports = (dal, secret) => {
         }
         console.log("Test if aut works 2 ")
 
-
-        //const user = users.find((user) => user.username === username);
         const user = await dal.getUser(username);
         if (user) { // If the user is found
             bcrypt.compare(password, user.hash, (err, result) => {
