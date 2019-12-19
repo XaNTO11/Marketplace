@@ -6,10 +6,8 @@ export default class AdminPage extends Component {
 
     render() {
 
-        if (!this.props.admin)
-            return <p>You are not an admin, ACCESS DENIED!</p>
-
         if (!this.props.categories) return <p>Loading...</p>;
+        
         const categories = this.props.categories;
         let categorieContent = <p>Redirecting to front page</p>;
 

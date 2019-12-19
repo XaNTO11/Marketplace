@@ -28,10 +28,11 @@ export const hideAlert = (title, text) => ({
 /******************************************************
   Actions for User credentials and Login / logout
  ******************************************************/
-export const addUserCredentials = (username, admin) => ({
+export const addUserCredentials = (username, admin, loggedIn) => ({
     type: 'ADD_USER_CRED',
     username: username,
-    admin: admin
+    admin: admin,
+    loggedIn: loggedIn
 });
 
 export const removeUserCredentials = () => ({
@@ -41,8 +42,8 @@ export const removeUserCredentials = () => ({
 export const login = (username, password) => async function (dispatch) {
     try {
         const user = await Auth.login(username, password);
-        if(user.username){
-            dispatch(addUserCredentials(user.username, user.admin));
+        if(await Auth.loggedIn()){
+            dispatch(addUserCredentials(user.username, user.admin, true));
             navigate("/"); // Front page
         }
         else{

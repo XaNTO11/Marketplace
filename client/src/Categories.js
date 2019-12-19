@@ -7,7 +7,7 @@ export default class Categories extends Component {
         if (!this.props.categories) return <p>Loading...</p>;
 
         const addBook = () => {
-            if (this.props.username) {
+            if (this.props.loggedIn) {
                 return <Link to="/category/CreateBook" className="btnText">Add Book</Link>
 
             }

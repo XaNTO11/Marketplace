@@ -17,20 +17,19 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            alertMsg: "",
-            loggedIn: false
+            alertMsg: ""
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.props.loadCategories();
         const API_URL = process.env.REACT_APP_API_URL;
         const auth = new AuthService(`${API_URL}/users/authenticate`);
-        this.props.addUserCredentials(auth.getUsername(), auth.getAdmin());
 
-        this.setState({
-            loggedIn: auth.loggedIn()
-        })
+        let isLoggedIn = auth.loggedIn();
+        console.log("isLoggedIn", isLoggedIn)
+        this.props.addUserCredentials(auth.getUsername(), auth.getAdmin(), isLoggedIn);
+
     }
 
     resetAlert() {
@@ -62,10 +61,11 @@ class App extends Component {
             </section>
         }
 
+        console.log("this1313", this.props.user)
+
         return (
             <>
                 {notification}
-
                 <section className="hero is-primary">
                     <div className="hero-body">
                         <div className="container">
@@ -85,16 +85,15 @@ class App extends Component {
                     <Router>
                         <Categories path="/"
                                     categories={this.props.categories}
-                                    username={this.props.user.username}
-                                    loggedIn={this.state.loggedIn}
+                                    loggedIn={this.props.user.loggedIn}
                         />
 
-                        <AdminPage path="/admin"
+                        {this.props.user.loggedIn && this.props.user.admin && (<AdminPage path="/admin"
                                    categories={this.props.categories}
                                    onDelCat={(id) => this.props.delCat(id)}
                                    onCreateCategory={(category) => this.props.postCategory(category)}
                                    admin={this.props.user.admin}
-                        />
+                        />)}
 
                         <Category path="/category/:id"
                                   getCategory={(id) => this.props.categories.find(e => e._id === id)}
@@ -107,10 +106,11 @@ class App extends Component {
                         />
 
                         <PostBook path="/category/CreateBook"
+                                // Conditional rendering
                                   onPostBook={(id, title, author, sellerName, sellerEmail) => this.props.postBook(id, title, author, sellerName, sellerEmail)}
                                   categories={this.props.categories}
-                                  username={this.props.user.username}
-                        />
+                                  loggedIn={this.props.user.loggedIn}
+                        /> 
 
                         <Login path="/login"
                             login={(username, password) => this.props.login(username, password)}
@@ -148,7 +148,7 @@ const mapDispatchToProps = dispatch => ({
     postBook: (id, title, author, sellerName, sellerEmail) => dispatch(postBook(id, title, author, sellerName, sellerEmail)),
     login: (username, password, admin) => dispatch(login(username, password, admin)),
     logout: _ => dispatch(logout()),
-    addUserCredentials: (username, admin) => dispatch(addUserCredentials(username, admin)),
+    addUserCredentials: (username, admin, loggedIn) => dispatch(addUserCredentials(username, admin, loggedIn)),
     hideAlert: _ => dispatch(hideAlert())
 });
 

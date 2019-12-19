@@ -14,6 +14,7 @@ export default class PostBook extends Component {
             sellerEmail: ""
         };
     }
+
     handleButtonClick(event) {
         event.preventDefault(); // Prevents the form button reloading the whole page. We don't do reloads in a SPA.
         if(this.state.catId === "" ||this.state.title === ""|| this.state.author === "" || this.state.sellerName === "" || this.state.sellerEmail === "" ){
@@ -31,12 +32,13 @@ export default class PostBook extends Component {
     }
 
     render() {
+        if(!this.props.loggedIn)
+            navigate("/login")
+
         let dropdown = this.props.categories.map(elm =>
             <option value={elm._id}>{elm.description}</option>
         );
 
-      if(this.props.username){
-        navigate("/category/CreateBook")
           return (
               <form>
                   <div className="field">
@@ -80,14 +82,5 @@ export default class PostBook extends Component {
                   </div>
               </form>
           )
-      }
-      else{
-            navigate("/login")
-          return(
-          <div>
-              Navigating to login page
-          </div>
-          )
-      }
     };
 }
