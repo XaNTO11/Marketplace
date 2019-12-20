@@ -48,7 +48,6 @@ class MarketplaceDAL {
         const cat = await this.getCat(catId);
         cat.books.push(book);
         return cat.save();
-
     }
 
     async getBookById(catId, bookId) {
@@ -85,19 +84,6 @@ class MarketplaceDAL {
             });
             promises.push(cat1.save());
             promises.push(cat2.save());
-
-
-            // for (let i = 0; i < count; i++) {
-            //     let cat = new this.marketplaceModel({
-            //         description: 'Harry Potter',
-            //         books: [
-            //             {title: 'Harry potter and the chamber of secrets', author: 'J.K. Rowling', cat: 'Harry Potter', sellerName: "Brian", sellerEmail: "hej@hej.com"},
-            //             {title: 'Harry potter and the half blood prince', author: 'J.K. Rowling', cat: 'Harry Potter', sellerName: "Brian", sellerEmail: "hej@hej.com"},
-            //         ]
-            //     });
-            //     promises.push(cat.save());
-            // }
-
             return Promise.all(promises);
         }
     }
