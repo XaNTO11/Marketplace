@@ -91,7 +91,7 @@ export const postCategory = description => async function(dispatch) {
             body: JSON.stringify(newCategory)
         });
         if (response.status === 401) {
-            dispatch(showAndHideAlert("Login", "You need to login to an admin user to post categories!", "alert"));
+            dispatch(showAndHideAlert("Login", "You need to be an admin user to post categories!", "alert"));
         } else {
             await response.json();
             dispatch(loadCategories());
@@ -110,7 +110,7 @@ export const delCat = (id) => async function(dispatch){
         });
 
         if (response.status === 401) {
-            dispatch(showAndHideAlert("Login", "You need to login delete categories!", "alert"));
+            dispatch(showAndHideAlert("Login", "You need to be an admin user to delete categories!", "alert"));
             await navigate("/login");
         } else {
             await response.json();

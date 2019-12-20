@@ -5,7 +5,6 @@ export default class Category extends Component {
 
     render() {
         const category = this.props.getCategory(this.props.id);
-        console.log(category)
         let booksContent = "";
         let cats = ""
         if (category) {

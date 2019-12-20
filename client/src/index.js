@@ -15,11 +15,7 @@ const logger = store => next => action => {
     if (!action.type) {
         next(action); return;
     }
-    console.group(action.type);
-    console.info('dispatching', action);
     let result = next(action);
-    console.log('next state', store.getState());
-    console.groupEnd();
     return result
 };
 

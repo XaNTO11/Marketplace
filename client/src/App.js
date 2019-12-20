@@ -59,7 +59,6 @@ class App extends Component {
             </section>
         }
 
-        console.log("this1313", this.props.user)
 
         return (
             <>
@@ -90,7 +89,6 @@ class App extends Component {
                                    categories={this.props.categories}
                                    onDelCat={(id) => this.props.delCat(id)}
                                    onCreateCategory={(category) => this.props.postCategory(category)}
-                                   // admin={this.props.user.admin}
                         />)}
 
                         <Category path="/category/:id"
@@ -102,7 +100,6 @@ class App extends Component {
                         />
 
                         {this.props.user.loggedIn && <PostBook path="/createbook"
-                                // Conditional rendering
                                   onPostBook={(id, title, author, sellerName, sellerEmail) => this.props.postBook(id, title, author, sellerName, sellerEmail)}
                                   categories={this.props.categories}
                                   loggedIn={this.props.user.loggedIn}

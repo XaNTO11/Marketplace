@@ -9,9 +9,8 @@ export default class AdminPage extends Component {
         if (!this.props.categories) return <p>Loading...</p>;
         
         const categories = this.props.categories;
-        let categorieContent = <p>Redirecting to front page</p>;
 
-        categorieContent = <p>loading...</p>;
+        let categorieContent = <p>loading...</p>;
         if (categories) {
             categorieContent = categories ?
                 categories.map(

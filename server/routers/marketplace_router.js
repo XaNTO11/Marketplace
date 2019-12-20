@@ -9,8 +9,6 @@ module.exports = (dal) => {
 
     router.get('/:id', (req, res) => {
         let id = req.params.id;
-        console.log("Bliver dette api kaldt?")
-        console.log(id)
         dal.getCat(id).then(cat => res.json(cat));
     });
 
@@ -26,7 +24,6 @@ module.exports = (dal) => {
     });
 
     router.post('/:id/books', (req, res) => {
-        console.log(req.body)
         dal.addBook(req.params.id, req.body).then(updatedCat => res.json(updatedCat));
     });
 

@@ -36,13 +36,12 @@ class UserDAL {
 
     async bootstrapTestusers() {
         let l = (await this.getUsers()).length;
-        console.log("Users in system:", l);
 
         if (l !== 0) return;
 
         const users = [
             // These are just some test users with passwords.
-            // The passwords are in clear text for testing purposes. (don't do this in production)
+            // The passwords are in clear text for testing purposes. (don't normally do this in production this time it is done, since our teacher asked for test data)
             { username: "Brian", password: '1990', admin: true},
             { username: "krdo", password: 'teacher', admin: false},
         ];
