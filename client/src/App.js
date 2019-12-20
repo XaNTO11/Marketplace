@@ -100,7 +100,7 @@ class App extends Component {
                         />
 
                         {this.props.user.loggedIn && <PostBook path="/createbook"
-                                  onPostBook={(id, title, author, sellerName, sellerEmail) => this.props.postBook(id, title, author, sellerName, sellerEmail)}
+                                  onPostBook={(id, title, author, price, sellerName, sellerEmail) => this.props.postBook(id, title, author, price,sellerName, sellerEmail)}
                                   categories={this.props.categories}
                                   loggedIn={this.props.user.loggedIn}
                         /> }
@@ -141,7 +141,7 @@ const mapDispatchToProps = dispatch => ({
     loadCategories: _ => dispatch(loadCategories()),
     postCategory: description => dispatch(postCategory(description)),
     delCat: (id) => dispatch(delCat(id)),
-    postBook: (id, title, author, sellerName, sellerEmail) => dispatch(postBook(id, title, author, sellerName, sellerEmail)),
+    postBook: (id, title, author, price, sellerName, sellerEmail) => dispatch(postBook(id, title, author, price, sellerName, sellerEmail)),
     login: (username, password, admin) => dispatch(login(username, password, admin)),
     logout: _ => dispatch(logout()),
     addUserCredentials: (username, admin, loggedIn) => dispatch(addUserCredentials(username, admin, loggedIn)),

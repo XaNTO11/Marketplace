@@ -10,6 +10,7 @@ export default class PostBook extends Component {
             catId: "",
             title: "",
             author: "",
+            price:0,
             sellerName: "",
             sellerEmail: ""
         };
@@ -17,7 +18,7 @@ export default class PostBook extends Component {
 
     handleButtonClick(event) {
         event.preventDefault(); // Prevents the form button reloading the whole page. We don't do reloads in a SPA.
-            this.props.onPostBook(this.state.catId, this.state.title, this.state.author, this.state.sellerName, this.state.sellerEmail); // Add the task to the state in App.js
+            this.props.onPostBook(this.state.catId, this.state.title, this.state.author, this.state.price, this.state.sellerName, this.state.sellerEmail); // Add the task to the state in App.js
     }
     handleChange(event) {
         this.setState({
@@ -52,6 +53,12 @@ export default class PostBook extends Component {
                           <br/>
                           <label htmlFor="itemText">Author<br/></label>
                           <input type="text" className="form-control" name="author"
+                                 placeholder="title of question"
+                                 onChange={event => this.handleChange(event)}
+                          />
+                          <br/>
+                          <label htmlFor="itemText">Price<br/></label>
+                          <input type="text" className="form-control" name="price"
                                  placeholder="title of question"
                                  onChange={event => this.handleChange(event)}
                           />

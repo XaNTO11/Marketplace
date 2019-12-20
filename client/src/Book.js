@@ -11,6 +11,7 @@ export default class Book extends Component {
                                 <div key={b._id} className="columns">
                                     <div className="column">Title: {b.title}</div>
                                     <div className="column">Author: {b.author}</div>
+                                    <div className="column">Price: {b.price}</div>
                                     <div className="column">Seller: {b.sellerName}</div>
                                     <div className="column">Contact email: {b.sellerEmail}</div>
                                 </div>
