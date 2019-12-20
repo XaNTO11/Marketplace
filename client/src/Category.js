@@ -21,12 +21,6 @@ export default class Category extends Component {
                         </Link>
                 ) : [];
         }
-        else{
-            // booksContent = <h1>No books to show since, category doesn't exist</h1>
-            // cats = <h1>Redirecting
-            // to category site</h1>
-            // navigate("/", alert("No category with that id, please choose one from the list"))
-        }
 
         return (
             <>

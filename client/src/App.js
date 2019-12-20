@@ -25,9 +25,7 @@ class App extends Component {
         this.props.loadCategories();
         const API_URL = process.env.REACT_APP_API_URL;
         const auth = new AuthService(`${API_URL}/users/authenticate`);
-
         let isLoggedIn = auth.loggedIn();
-        console.log("isLoggedIn", isLoggedIn)
         this.props.addUserCredentials(auth.getUsername(), auth.getAdmin(), isLoggedIn);
 
     }
@@ -92,13 +90,11 @@ class App extends Component {
                                    categories={this.props.categories}
                                    onDelCat={(id) => this.props.delCat(id)}
                                    onCreateCategory={(category) => this.props.postCategory(category)}
-                                   admin={this.props.user.admin}
+                                   // admin={this.props.user.admin}
                         />)}
 
                         <Category path="/category/:id"
                                   getCategory={(id) => this.props.categories.find(e => e._id === id)}
-                                  // getCategoryKK={(id) => this.props.loadCategoryByID(id)}
-
                         />
 
                         <Book path="/category/:id/books/:bid"
@@ -145,7 +141,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    // loadCategoryByID: id => dispatch(loadCategoryByID(id)),
     loadCategories: _ => dispatch(loadCategories()),
     postCategory: description => dispatch(postCategory(description)),
     delCat: (id) => dispatch(delCat(id)),

@@ -17,13 +17,7 @@ export default class PostBook extends Component {
 
     handleButtonClick(event) {
         event.preventDefault(); // Prevents the form button reloading the whole page. We don't do reloads in a SPA.
-        if(this.state.catId === "" ||this.state.title === ""|| this.state.author === "" || this.state.sellerName === "" || this.state.sellerEmail === "" ){
-            alert("Please fill out all the input fields")
-        }
-        else{
             this.props.onPostBook(this.state.catId, this.state.title, this.state.author, this.state.sellerName, this.state.sellerEmail); // Add the task to the state in App.js
-            alert(`You just posted a book with the title: ${this.state.title}`)
-        }
     }
     handleChange(event) {
         this.setState({

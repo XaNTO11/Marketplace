@@ -80,22 +80,9 @@ export const loadCategories = _ => async function (dispatch) {
         dispatch(showAndHideAlert("Error loading categories", e.message, "error"));
     }
 };
-// export const loadCategoryByID = id => async function (dispatch) {
-//     try {
-//         const url = `${API_URL}/category/${id}`;
-//         const response = await Auth.fetch(url);
-//         const data = await response.json();
-//         // console.log(data, "test")
-//
-//         // dispatch(replaceCategories(data));
-//     } catch (e) {
-//         console.error(e);
-//         dispatch(showAndHideAlert("Error loading categories", e.message, "error"));
-//     }
-// };
 
 export const postCategory = description => async function(dispatch) {
-    if (description === "") return;
+    if (description === "") return dispatch(showAndHideAlert("Category creation failed", "You need to fill out the category description!", "alert"));
     try {
         const newCategory = { description: description};
 
@@ -137,7 +124,8 @@ export const delCat = (id) => async function(dispatch){
 }
 
 export const postBook = (id, title, author, sellerName, sellerEmail) => async function(dispatch) {
-    if (title === "" ||author === "" ||sellerName === "" ||sellerEmail === "") return dispatch(showAndHideAlert("Login", "You need to login to post books!", "alert"));
+    if (id === "", title === "" ||author === "" ||sellerName === "" ||sellerEmail === "")
+        return dispatch(showAndHideAlert("Posting Failed", "You need to fill out every thing!", "alert"));
     try {
         const newBook = { title: title, author: author, sellerName: sellerName, sellerEmail: sellerEmail };
         const response = await Auth.fetch(`${API_URL}/category/${id}/books`, {
@@ -150,6 +138,7 @@ export const postBook = (id, title, author, sellerName, sellerEmail) => async fu
             await navigate("/login");
         } else {
             await response.json();
+            dispatch(showAndHideAlert("Posted", "You successfully posted a book", "success"));
             dispatch(loadCategories());
         }
     } catch (e) {
